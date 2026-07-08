@@ -64,7 +64,8 @@
         <button class="btn" onclick="startExperience()">Click to Open My Heart ❤️</button>
     </div>
 
-    <audio id="bg-music"><source src="voiceover1.mp3" type="audio/mpeg"></audio>
+    <!-- Starts with voiceover2 -->
+    <audio id="bg-music"><source src="voiceover2.mp3" type="audio/mpeg"></audio>
 
     <div class="hero-container">
         <div class="slideshow-wrapper">
@@ -137,9 +138,10 @@
             audio.play();
             audio.onended = () => {
                 if (!isSecondTrack) {
-                    audio.src = "voiceover2.mp3";
-                    audio.play();
                     isSecondTrack = true;
+                    audio.src = "voiceover1.mp3"; // Now switches to 1
+                    audio.load();
+                    audio.play();
                 }
             };
             startSlideshow();
@@ -156,13 +158,12 @@
         }
 
         function selectGift(el, prize) {
-            if (hasChosenGift) return; // Stop if already chosen
+            if (hasChosenGift) return;
             hasChosenGift = true;
             
             el.querySelector('.prize-text').style.display = 'block';
             el.style.borderColor = '#ffb5a7';
             
-            // Disable all boxes
             document.querySelectorAll('.gift-box').forEach(box => {
                 if (box !== el) box.classList.add('disabled');
                 box.style.pointerEvents = 'none';
