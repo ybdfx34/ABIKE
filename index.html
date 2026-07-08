@@ -64,9 +64,6 @@
         <button class="btn" onclick="startExperience()">Click to Open My Heart ❤️</button>
     </div>
 
-    <!-- Starts with voiceover2 -->
-    <audio id="bg-music"><source src="voiceover2.mp3" type="audio/mpeg"></audio>
-
     <div class="hero-container">
         <div class="slideshow-wrapper">
             <div class="slideshow">
@@ -127,23 +124,20 @@
     </div>
 
     <script>
-        const audio = document.getElementById('bg-music');
-        let isSecondTrack = false;
+        const audio1 = new Audio('voiceover2.mp3');
+        const audio2 = new Audio('voiceover1.mp3');
         let hasChosenGift = false;
 
         function startExperience() {
             document.getElementById('welcome-screen').style.opacity = '0';
             setTimeout(() => document.getElementById('welcome-screen').style.display = 'none', 800);
             
-            audio.play();
-            audio.onended = () => {
-                if (!isSecondTrack) {
-                    isSecondTrack = true;
-                    audio.src = "voiceover1.mp3"; // Now switches to 1
-                    audio.load();
-                    audio.play();
-                }
+            // Play first, then second
+            audio1.play().catch(e => console.log("Audio 1 blocked", e));
+            audio1.onended = () => {
+                audio2.play().catch(e => console.log("Audio 2 blocked", e));
             };
+            
             startSlideshow();
         }
 
