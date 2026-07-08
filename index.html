@@ -31,7 +31,12 @@
             z-index: 9999; color: white; text-align: center; padding: 20px; transition: opacity 0.8s;
         }
 
-        .btn { background-color: var(--accent-gold); color: #000; padding: 15px 40px; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; }
+        /* Bold and Catchy Welcome Text */
+        .welcome-title { font-size: 3.5rem; color: var(--accent-gold); margin-bottom: 15px; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+        .welcome-subtitle { font-size: 1.5rem; font-style: italic; color: var(--soft-rose); margin-bottom: 30px; font-weight: bold; }
+
+        .btn { background-color: var(--accent-gold); color: #000; padding: 20px 50px; border: none; border-radius: 50px; font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: transform 0.2s; }
+        .btn:hover { transform: scale(1.05); }
 
         .hero-container { width: 100%; max-width: 600px; margin: 40px auto; border-radius: 20px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.3); background: #000; }
         .slideshow-wrapper { position: relative; width: 100%; padding-top: 125%; }
@@ -59,8 +64,8 @@
 <body>
 
     <div id="welcome-screen">
-        <h1>For My Abike ❤️</h1>
-        <p>Every love story is beautiful, but ours is my favorite.</p>
+        <h1 class="welcome-title">For My Abike ❤️</h1>
+        <p class="welcome-subtitle">Every love story is beautiful, but ours is my favorite.</p>
         <button class="btn" onclick="startExperience()">Click to Open My Heart ❤️</button>
     </div>
 
@@ -124,7 +129,8 @@
     </div>
 
     <script>
-        const audio1 = new Audio('voiceover2.mp3');
+        // Updated to use voiceover3.mp3 first
+        const audio1 = new Audio('voiceover3.mp3');
         const audio2 = new Audio('voiceover1.mp3');
         let hasChosenGift = false;
 
@@ -132,7 +138,7 @@
             document.getElementById('welcome-screen').style.opacity = '0';
             setTimeout(() => document.getElementById('welcome-screen').style.display = 'none', 800);
             
-            // Play first, then second
+            // Sequential playback
             audio1.play().catch(e => console.log("Audio 1 blocked", e));
             audio1.onended = () => {
                 audio2.play().catch(e => console.log("Audio 2 blocked", e));
