@@ -17,10 +17,15 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
 
         body {
-            color: var(--text-light); overflow-x: hidden; scroll-behavior: smooth;
+            color: var(--text-light);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
             background-image: linear-gradient(rgba(18, 18, 18, 0.85), rgba(18, 18, 18, 0.85)), url('pic8.jpeg');
-            background-size: cover; background-position: center 25%; background-attachment: fixed;
-            background-repeat: no-repeat; background-color: var(--primary-black);
+            background-size: cover;
+            background-position: center 25%;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-color: var(--primary-black);
         }
 
         #welcome-screen {
@@ -31,34 +36,30 @@
         }
 
         #welcome-screen h1 { font-size: 3rem; margin-bottom: 15px; color: var(--accent-gold); animation: heartbeat 1.5s infinite; }
-        .btn { background-color: var(--accent-gold); color: var(--primary-black); padding: 15px 40px; border: none; border-radius: 50px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: transform 0.2s; }
-        .btn:hover { transform: scale(1.05); }
+        .btn { background-color: var(--accent-gold); color: var(--primary-black); padding: 15px 40px; border: none; border-radius: 50px; font-size: 1.1rem; font-weight: bold; cursor: pointer; }
+        
+        #music-container {
+            position: fixed; bottom: 20px; right: 20px; z-index: 1000;
+            background: rgba(30, 30, 30, 0.9); border: 1px solid var(--accent-gold);
+            padding: 10px 15px; border-radius: 30px; display: none; align-items: center; gap: 10px;
+        }
 
-        #music-container { position: fixed; bottom: 20px; right: 20px; z-index: 1000; background: rgba(30, 30, 30, 0.9); border: 1px solid var(--accent-gold); padding: 10px 15px; border-radius: 30px; display: none; align-items: center; gap: 10px; }
-
-        .hero-container { position: relative; width: 100%; max-width: 600px; margin: 40px auto 20px auto; border-radius: 20px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.3); background: #000; }
-        .slideshow-wrapper { position: relative; width: 100%; padding-top: 125%; }
+        .hero-container { position: relative; width: 100%; max-width: 600px; margin: 40px auto; border-radius: 20px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.3); background: #000; }
+        .slideshow-wrapper { position: relative; width: 100%; padding-top: 100%; }
         .slideshow img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; transition: opacity 1s ease-in-out; }
 
-        .letter-content-container, .section, .countdown-box, .final-letter { max-width: 600px; margin: 0 auto 40px auto; padding: 40px 25px; background: var(--card-black); backdrop-filter: blur(8px); border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); }
-        .section-title { font-size: 2.2rem; color: var(--accent-gold); margin-bottom: 40px; text-align: center; }
+        .letter-content-container, .section, .gift-container { max-width: 600px; margin: 40px auto; padding: 40px 25px; background: var(--card-black); backdrop-filter: blur(8px); border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); }
+        .section-title { font-size: 2rem; color: var(--accent-gold); margin-bottom: 30px; text-align: center; }
 
-        .love-list { list-style: none; max-width: 650px; margin: 0 auto; text-align: left; }
-        .love-list li { font-size: 1.15rem; padding: 15px 20px; margin-bottom: 12px; background: var(--card-black); border-radius: 12px; border-left: 5px solid var(--accent-gold); display: flex; align-items: center; }
+        .gift-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 20px; }
+        .gift-box { background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(212, 175, 55, 0.3); border-radius: 15px; padding: 20px; text-align: center; cursor: pointer; transition: 0.3s; }
+        .gift-box:hover { border-color: var(--accent-gold); background: rgba(212, 175, 55, 0.1); }
+        .gift-box.opened { background: rgba(212, 175, 55, 0.2); border-color: var(--accent-gold); }
+        .prize-text { display: none; font-weight: bold; color: var(--soft-rose); }
+        .lock-timer { display: none; font-size: 0.8rem; color: #ff4d4d; }
 
-        .notes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 20px; margin-top: 20px; }
-        .note-card { background: var(--card-black); padding: 25px 10px; border-radius: 15px; cursor: pointer; border: 1px dashed rgba(212, 175, 55, 0.5); text-align: center; }
-        .note-card .envelope { font-size: 2.5rem; }
-        .note-card .message { display: none; font-size: 1rem; color: var(--soft-rose); margin-top: 10px; }
-        .note-card.opened .envelope { display: none; }
-        .note-card.opened .message { display: block; }
-
-        .music-quote { font-style: italic; font-size: 1.2rem; line-height: 1.6; margin-top: 20px; background: rgba(0, 0, 0, 0.4); padding: 20px; border-radius: 10px; border-left: 3px solid var(--soft-rose); }
-        .countdown-box { text-align: center; }
-        .countdown-box .date { font-size: 3.5rem; font-weight: bold; color: var(--accent-gold); }
-        .signature { margin-top: 40px; font-size: 1.35rem; font-weight: bold; color: var(--accent-gold); text-align: center; }
-
-        @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
+        .signature { margin-top: 40px; font-size: 1.35rem; font-weight: bold; color: var(--accent-gold); text-align: center; line-height: 1.6; }
+        @keyframes heartbeat { 0% { transform: scale(1); } 50% { transform: scale(1.03); } 100% { transform: scale(1); } }
     </style>
 </head>
 <body>
@@ -69,89 +70,77 @@
         <button class="btn" onclick="openHeart()">Click to Open My Heart ❤️</button>
     </div>
 
-    <audio id="bg-music" loop><source src="voiceover1.mp3" type="audio/mpeg"></audio>
+    <audio id="bg-music" loop>
+        <source src="voiceover1.mp3" type="audio/mpeg">
+    </audio>
 
     <div id="music-container">
-        <span style="font-size: 0.8rem; color: var(--accent-gold); font-weight: bold;">🎵 Playing Your Recording...</span>
+        <span style="font-size: 0.8rem; color: var(--accent-gold);">🎵 Playing Recording...</span>
         <button id="toggle-play" style="background: var(--accent-gold); border: none; padding: 5px 10px; border-radius: 15px; cursor: pointer;">Mute</button>
     </div>
 
     <div class="hero-container">
         <div class="slideshow-wrapper">
             <div class="slideshow">
-                <img src="pic1.jpeg" style="opacity: 1;" alt="1"><img src="pic2.jpeg" alt="2"><img src="pic3.jpeg" alt="3">
-                <img src="pic4.jpeg" alt="4"><img src="pic5.jpeg" alt="5"><img src="pic6.jpeg" alt="6">
-                <img src="pic7.jpeg" alt="7"><img src="pic8.jpeg" alt="8"><img src="pic9.jpeg" alt="9">
+                <img src="pic1.jpeg" style="opacity: 1;"> <img src="pic2.jpeg"> <img src="pic3.jpeg">
+                <img src="pic4.jpeg"> <img src="pic5.jpeg"> <img src="pic6.jpeg">
+                <img src="pic7.jpeg"> <img src="pic8.jpeg"> <img src="pic9.jpeg">
             </div>
         </div>
     </div>
 
     <div class="letter-content-container">
         <h2>My Abike,</h2>
-        <p>Four years ago, on March 12, life quietly gave me one of its greatest gifts—you.</p>
-        <p>From the little conversations to the unforgettable memories, you’ve become one of the best parts of my life. Every day with you reminds me that love isn’t always loud; sometimes it’s found in the little moments, the random laughs, the silent prayers, and simply knowing you’re there.</p>
-        <p>If I had to choose again, I’d still choose you.</p>
+        <p>Four years ago, on March 12, life gave me you. If I had to choose again, I’d still choose you.</p>
     </div>
 
-    <section class="section">
-        <h2 class="section-title">“Things I Love About You”</h2>
-        <ul class="love-list">
-            <li><span>❤️</span> Your smile that brightens my days.</li>
-            <li><span>❤️</span> Your beautiful heart.</li>
-            <li><span>❤️</span> The way you carry yourself with grace.</li>
-            <li><span>❤️</span> Your strength and laughter.</li>
-        </ul>
-    </section>
-
-    <section class="section">
-        <h2 class="section-title">Pick Your Gift ❤️</h2>
-        <p style="text-align: center; color: var(--text-muted);">Choose a box to see your Girlfriend's Day gift!</p>
-        <div class="notes-grid">
-            <div class="note-card" onclick="revealGift(this, '🌹 A Beautiful Bouquet of Roses')"><div class="envelope">🎁</div><div class="message">Roses</div></div>
-            <div class="note-card" onclick="revealGift(this, '💸 50K Cash')"><div class="envelope">🎁</div><div class="message">50K Cash</div></div>
-            <div class="note-card" onclick="revealGift(this, '👩‍🦱 A Gorgeous New Wig')"><div class="envelope">🎁</div><div class="message">Wig</div></div>
-            <div class="note-card" onclick="revealGift(this, '👠 Stunning Heels')"><div class="envelope">🎁</div><div class="message">Heels</div></div>
-        </div>
-        <div id="gift-result" style="margin-top: 30px; text-align: center; font-size: 1.5rem; font-weight: bold; color: var(--accent-gold);"></div>
-    </section>
-
-    <section class="section">
-        <div class="music-section">
-            <h2 class="section-title">“If I Could Describe You…”</h2>
-            <p class="music-quote">“Some people become our favorite song... Every time I hear Asa, I think of your calm spirit and the peace you bring into my life.”</p>
+    <section class="gift-container">
+        <h2 style="color: var(--accent-gold); margin-bottom: 10px;">🎁 Girlfriend's Day Gift 🎁</h2>
+        <p style="font-style: italic; color: var(--soft-rose); margin-bottom: 20px;">Pick one box. Whatever you unlock is yours for Girlfriend's Day!</p>
+        <div class="gift-grid">
+            <div class="gift-box" id="box1" onclick="selectGift('box1', '🌹 Fresh Red Roses')"><div class="box-icon" style="font-size: 2rem;">🎁</div><div class="prize-text">🌹 Fresh Red Roses</div><div class="lock-timer">⏳ Locked</div></div>
+            <div class="gift-box" id="box2" onclick="selectGift('box2', '💰 50,000 Cash')"><div class="box-icon" style="font-size: 2rem;">🎁</div><div class="prize-text">💰 50,000 Cash</div><div class="lock-timer">⏳ Locked</div></div>
+            <div class="gift-box" id="box3" onclick="selectGift('box3', '💇‍♀️ Gorgeous Wig')"><div class="box-icon" style="font-size: 2rem;">🎁</div><div class="prize-text">💇‍♀️ Gorgeous Wig</div><div class="lock-timer">⏳ Locked</div></div>
+            <div class="gift-box" id="box4" onclick="selectGift('box4', '👠 Luxury Heels')"><div class="box-icon" style="font-size: 2rem;">🎁</div><div class="prize-text">👠 Luxury Heels</div><div class="lock-timer">⏳ Locked</div></div>
         </div>
     </section>
 
-    <section class="section">
-        <div class="countdown-box">
-            <h3>Together since</h3>
-            <div class="date">March 12</div>
-            <p>4 beautiful years and still counting… ❤️</p>
-        </div>
-    </section>
-
-    <section class="section">
-        <div class="final-letter">
-            <h2 style="color: var(--accent-gold); margin-bottom: 25px;">To My Abike</h2>
-            <p>I love you today, tomorrow, and forever.</p>
-            <div class="signature">Forever yours,<br>Daniel Damilola<br>Oko Abike ❤️</div>
-        </div>
-    </section>
+    <div class="signature" style="padding-bottom: 50px;">
+        Forever yours,<br>
+        Daniel Damilola<br>
+        Oko Abike ❤️
+    </div>
 
     <script>
         const audio = document.getElementById('bg-music');
+        let hasChosen = false;
+
         function openHeart() {
             document.getElementById('welcome-screen').style.opacity = '0';
-            setTimeout(() => { document.getElementById('welcome-screen').style.display = 'none'; document.getElementById('music-container').style.display = 'flex'; }, 800);
+            setTimeout(() => document.getElementById('welcome-screen').style.display = 'none', 800);
+            document.getElementById('music-container').style.display = 'flex';
             audio.play();
-            const slides = document.querySelectorAll('.slideshow img');
-            let i = 0; setInterval(() => { slides[i].style.opacity = '0'; i = (i + 1) % slides.length; slides[i].style.opacity = '1'; }, 3500);
+            startSlideshow();
         }
 
-        function revealGift(element, giftName) {
-            element.classList.add('opened');
-            document.getElementById('gift-result').innerText = "You chose: " + giftName + "!";
-            document.querySelectorAll('.note-card').forEach(c => c.style.pointerEvents = 'none');
+        function startSlideshow() {
+            const slides = document.querySelectorAll('.slideshow img');
+            let c = 0;
+            setInterval(() => {
+                slides[c].style.opacity = '0';
+                c = (c + 1) % slides.length;
+                slides[c].style.opacity = '1';
+            }, 3500);
+        }
+
+        function selectGift(id, prize) {
+            if (hasChosen) return;
+            hasChosen = true;
+            const box = document.getElementById(id);
+            box.querySelector('.box-icon').style.display = 'none';
+            box.querySelector('.prize-text').style.display = 'block';
+            box.classList.add('opened');
+            document.querySelectorAll('.gift-box').forEach(b => { if(b.id !== id) b.querySelector('.lock-timer').style.display = 'block'; });
         }
 
         document.getElementById('toggle-play').addEventListener('click', (e) => {
